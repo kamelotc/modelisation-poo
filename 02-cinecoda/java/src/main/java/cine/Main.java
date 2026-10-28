@@ -59,6 +59,22 @@ public class Main {
         vendreBillet(seance4, new BilletEtudiant(), "billet etudiant vendu");
         vendreBillet(seance4, new BilletEtudiant(), "billet etudiant vendu");
 
+        try{
+            seance4.vendre(new BilletEtudiant());
+        }catch(IllegalStateException e){
+            log.info("Vente refusée : " + e.getMessage());
+        }
+        log.info("Place restantes: " + seance4.getPlaceRestantes());
+        log.info("Taux de remplissage : " + seance4.getTauxRemplissage() + " %");
+        seance4.debut();
+        log.info("Séance démarrée");
+        seance4.fin();
+        log.info("Séance terminée");
+        log.info("État de la Salle 2 : " + salle2.getEtat());
+        log.info("Salles libres : Salle 1");
+        log.info("Projections de la copie de « I Play Rocky » : " + copieRocky.getNbProjections());
+
+
 
 
 
