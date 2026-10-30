@@ -9,7 +9,7 @@ public class Main {
 
     public static void main(String[] args) {
         log = ConsoleLogger.create("cine.scenario");
-        LocaleDate aujourdHui = LocalDate.of(2026,10,18);
+        LocalDate aujourdHui = LocalDate.of(2026, 10, 18);
 
         log.info("=== 1. Création du cinéma CinéCoda ===");
         Cinema cineCoda = new Cinema("CinéCoda");
@@ -59,9 +59,9 @@ public class Main {
         vendreBillet(seance4, new BilletEtudiant(), "billet etudiant vendu");
         vendreBillet(seance4, new BilletEtudiant(), "billet etudiant vendu");
 
-        try{
+        try {
             seance4.vendre(new BilletEtudiant());
-        }catch(IllegalStateException e){
+        } catch (IllegalStateException e) {
             log.info("Vente refusée : " + e.getMessage());
         }
         log.info("Place restantes: " + seance4.getPlaceRestantes());
@@ -74,11 +74,43 @@ public class Main {
         log.info("Salles libres : Salle 1");
         log.info("Projections de la copie de « I Play Rocky » : " + copieRocky.getNbProjections());
 
+        log.info("=== 7. I Play Rocky en Salle 2 le 15/10/2026 (tarif de base 8,00 €) ===");
+        Seance seance5 = cineCoda.programmer(2, copieRocky, aujourdHui, 8.00);
+        tenterDemarrage(seance5);
+        salle2.finNettoyage();
+        log.info("Nettoyage de la Salle 2 terminé");
+        tenterDemarrage(seance5);
 
+        log.info("=== 8. Programmation en Salle 3 ===");
+        try {
+            cineCoda.programmer(3, copieRocky, aujourdHui, 10.00);
+        } catch (IllegalArgumentException e) {
+            log.info("Programmation refusée : " + e.getMessage());
+        }
 
-
-
-
-        // Rejouez ici le scénario de l'énoncé, en affichant chaque étape avec log.info(...)
+        log.info("=== 9. Bilan du 15/10/2026 ===");
+        for (Seance s : cineCoda.getSeancesDuJour(aujourdHui)) {
+            log.info(String.format(Locale.FRANCE, "%s, Salle %d : %d billet(s), recette %.2f €",
+                    s.getSupport().getFilm().getTitre(),
+                    s.getSalle().getNumero(),
+                    s.getBilletsVendus().size(),
+                    s.getRecette()));
+        }
+        log.info(String.format(Locale.FRANCE, "Recette du jour : %.2f €", cineCoda.getRecetteDuJour(aujourdHui)));
     }
+
+    private static void vendreBillet(Seance seance, Billet billet, String messageAttenduDansLeLog) {
+        seance.vendre(billet);
+        log.info(String.format(Locale.FRANCE, "%s : %.2f €", messageAttenduDansLeLog, billet.calculerPrix(seance.getTarifDeBase())));
+    }
+
+    private static void tenterDemarrage(Seance seance) {
+        try {
+            seance.debut();
+            log.info("Séance démarrée");
+        } catch (IllegalStateException e) {
+            log.info("Démarrage refusé : " + e.getMessage());
+        }
+    }
+
 }
