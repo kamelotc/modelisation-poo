@@ -11,8 +11,11 @@ public class Copie35mm extends Support{
     public int getNbProjections() {
         return nbProjections;
     }
+    public void ajouterProjection() {
+        this.nbProjections++;
+    }
     @Override
-    public void verifierCompatibilie(Projecteur projecteur, LocalDate dateSeance){
+    public void verifierCompatibilite(Projecteur projecteur, LocalDate dateSeance){
         if (!(projecteur instanceof ProjecteurArgentique)) {
             throw new IllegalStateException("une copie 35 mm ne peut pas être lue par un projecteur numérique");
         }

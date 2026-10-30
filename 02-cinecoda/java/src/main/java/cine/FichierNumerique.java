@@ -4,10 +4,11 @@ import java.time.LocalDate;
 
 public class FichierNumerique extends Support {
     private final LocalDate dateExpiration;
-    public FichierNumerique(Film film, LocalDate dateExpiration);{
+    public FichierNumerique(Film film, LocalDate dateExpiration){
         super(film);
         this.dateExpiration=dateExpiration;
     }
+
     @Override
     public void verifierCompatibilite(Projecteur projecteur, LocalDate dateSeance) {
         if (!(projecteur instanceof ProjecteurNumerique)) {
