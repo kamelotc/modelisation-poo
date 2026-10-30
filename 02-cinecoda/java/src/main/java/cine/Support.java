@@ -1,7 +1,7 @@
 package cine;
 import java.time.LocalDate;
 
-public class Support {
+public abstract class Support {
     private final Film film;
     public Support (Film film){
         this.film=film;

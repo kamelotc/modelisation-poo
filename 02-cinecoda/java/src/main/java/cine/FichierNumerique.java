@@ -2,7 +2,7 @@ package cine;
 
 import java.time.LocalDate;
 
-public class FichierNumerique {
+public class FichierNumerique extends Support {
     private final LocalDate dateExpiration;
     public FichierNumerique(Film film, LocalDate dateExpiration);{
         super(film);
@@ -11,7 +11,7 @@ public class FichierNumerique {
     @Override
     public void verifierCompatibilite(Projecteur projecteur, LocalDate dateSeance) {
         if (!(projecteur instanceof ProjecteurNumerique)) {
-            throw new IllegalStateException("projecteur argentique ne peux pas lire fichier numerique");
+            throw new IllegalStateException("un fichier numérique ne peut pas être lu par un projecteur argentique");
         }
         if (dateSeance.isAfter(dateExpiration)) {
             throw new IllegalStateException("la clé de lecture de « " + getFilm().getTitre() + " » a expiré");
