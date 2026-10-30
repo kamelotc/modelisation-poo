@@ -64,7 +64,7 @@ public class Main {
         } catch (IllegalStateException e) {
             log.info("Vente refusée : " + e.getMessage());
         }
-        log.info("Place restantes: " + seance4.getPlaceRestantes());
+        log.info("Place restantes: " + seance4.getPlacesRestantes());
         log.info("Taux de remplissage : " + seance4.getTauxRemplissage() + " %");
         seance4.debut();
         log.info("Séance démarrée");
