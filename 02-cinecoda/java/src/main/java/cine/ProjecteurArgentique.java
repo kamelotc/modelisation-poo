@@ -1,4 +1,4 @@
 package cine;
 
-public class ProjecteurArgentique {
+public class ProjecteurArgentique extends Projecteur{
 }

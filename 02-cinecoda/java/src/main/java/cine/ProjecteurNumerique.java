@@ -1,4 +1,4 @@
 package cine;
 
-public class ProjecteurNumerique {
+public class ProjecteurNumerique extends Projecteur {
 }
